@@ -35,7 +35,7 @@ After a successful login you are redirected to the [`/oauth/confirm_access`](htt
 
 The authorization server now redirects back to the client application on a pre-approved URI, with an *authorization code*. 
 
-The client then accesses the authorization server on the [`/oauth/token`](http://localhost:8081/oauth/token) endpoint to exchange the access code with an access token. 
+The client then accesses the authorization server on the [`/oauth/token`](http://localhost:8081/oauth/token) endpoint to exchange the authorization code with an access token (including a refresh token). 
 
 *This token is actually a JSON Web Token (JWT). If you want to see what's in it, visit [jwt.io](http://jwt.io/) and paste it in the Encoded section. You can find the token in the JSON outputted by the client as `details.tokenValue`.*
 
