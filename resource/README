@@ -1,0 +1,336 @@
+Gradle Spring Boot project with following (minimal) dependency:
+
+compile(group: 'org.springframework.boot', name: 'spring-boot-starter')
+
+\--- org.springframework.boot:spring-boot-starter: -> 1.3.0.M2
+     +--- org.springframework.boot:spring-boot:1.3.0.M2
+     |    +--- org.springframework:spring-core:4.2.0.RC2
+     |    \--- org.springframework:spring-context:4.2.0.RC2
+     |         +--- org.springframework:spring-aop:4.2.0.RC2
+     |         |    +--- aopalliance:aopalliance:1.0
+     |         |    +--- org.springframework:spring-beans:4.2.0.RC2
+     |         |    |    \--- org.springframework:spring-core:4.2.0.RC2
+     |         |    \--- org.springframework:spring-core:4.2.0.RC2
+     |         +--- org.springframework:spring-beans:4.2.0.RC2 (*)
+     |         +--- org.springframework:spring-core:4.2.0.RC2
+     |         \--- org.springframework:spring-expression:4.2.0.RC2
+     |              \--- org.springframework:spring-core:4.2.0.RC2
+     +--- org.springframework.boot:spring-boot-autoconfigure:1.3.0.M2
+     |    +--- org.springframework.boot:spring-boot:1.3.0.M2 (*)
+     |    \--- org.yaml:snakeyaml:1.15
+     +--- org.springframework.boot:spring-boot-starter-logging:1.3.0.M2
+     |    +--- ch.qos.logback:logback-classic:1.1.3
+     |    |    +--- ch.qos.logback:logback-core:1.1.3
+     |    |    \--- org.slf4j:slf4j-api:1.7.7 -> 1.7.12
+     |    +--- org.slf4j:jcl-over-slf4j:1.7.12
+     |    |    \--- org.slf4j:slf4j-api:1.7.12
+     |    +--- org.slf4j:jul-to-slf4j:1.7.12
+     |    |    \--- org.slf4j:slf4j-api:1.7.12
+     |    \--- org.slf4j:log4j-over-slf4j:1.7.12
+     |         \--- org.slf4j:slf4j-api:1.7.12
+     +--- org.springframework:spring-core:4.2.0.RC2
+     \--- org.yaml:snakeyaml:1.15
+
+
+compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web')
+
+- Includes spring-boot-starter
+- Adds spring-boot-starter-tomcat
+- Adds spring-boot-starter-validation
+- Adds jackson-databind
+- Adds spring-web
+- Adds spring-webmvc
+
+\--- org.springframework.boot:spring-boot-starter-web: -> 1.3.0.M2
+     +--- org.springframework.boot:spring-boot-starter:1.3.0.M2
+     +--- org.springframework.boot:spring-boot-starter-tomcat:1.3.0.M2
+     |    +--- org.apache.tomcat.embed:tomcat-embed-core:8.0.23
+     |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.23
+     |    +--- org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.23
+     |    \--- org.apache.tomcat.embed:tomcat-embed-websocket:8.0.23
+     |         \--- org.apache.tomcat.embed:tomcat-embed-core:8.0.23
+     +--- org.springframework.boot:spring-boot-starter-validation:1.3.0.M2
+     |    +--- org.springframework.boot:spring-boot-starter:1.3.0.M2 (*)
+     |    +--- org.apache.tomcat.embed:tomcat-embed-el:8.0.23
+     |    \--- org.hibernate:hibernate-validator:5.1.3.Final
+     |         +--- javax.validation:validation-api:1.1.0.Final
+     |         +--- org.jboss.logging:jboss-logging:3.1.3.GA
+     |         \--- com.fasterxml:classmate:1.0.0
+     +--- com.fasterxml.jackson.core:jackson-databind:2.5.4
+     |    +--- com.fasterxml.jackson.core:jackson-annotations:2.5.0 -> 2.5.4
+     |    \--- com.fasterxml.jackson.core:jackson-core:2.5.4
+     +--- org.springframework:spring-web:4.2.0.RC2
+     |    +--- org.springframework:spring-aop:4.2.0.RC2 (*)
+     |    +--- org.springframework:spring-beans:4.2.0.RC2 (*)
+     |    +--- org.springframework:spring-context:4.2.0.RC2 (*)
+     |    \--- org.springframework:spring-core:4.2.0.RC2
+     \--- org.springframework:spring-webmvc:4.2.0.RC2
+          +--- org.springframework:spring-beans:4.2.0.RC2 (*)
+          +--- org.springframework:spring-context:4.2.0.RC2 (*)
+          +--- org.springframework:spring-core:4.2.0.RC2
+          +--- org.springframework:spring-expression:4.2.0.RC2 (*)
+          \--- org.springframework:spring-web:4.2.0.RC2 (*)
+
+# With the following dependencies:
+
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter') {
+        exclude(module: 'spring-boot-autoconfigure')
+        exclude(module: 'spring-boot-starter-logging')
+    }
+    compile 'commons-logging:commons-logging:1.2'
+
+# The following beans are registered:
+
++ org.springframework.context.annotation.internalConfigurationAnnotationProcessor	class org.springframework.context.annotation.ConfigurationClassPostProcessor
++ org.springframework.context.annotation.internalAutowiredAnnotationProcessor	class org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor
++ org.springframework.context.annotation.internalRequiredAnnotationProcessor	class org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor
++ org.springframework.context.annotation.internalCommonAnnotationProcessor	class org.springframework.context.annotation.CommonAnnotationBeanPostProcessor
++ org.springframework.context.event.internalEventListenerProcessor	class org.springframework.context.event.EventListenerMethodProcessor
++ org.springframework.context.event.internalEventListenerFactory	class org.springframework.context.event.DefaultEventListenerFactory
++ application	class changeit.Application
++ org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor	class org.springframework.context.annotation.ConfigurationClassPostProcessor$ImportAwareBeanPostProcessor
++ org.springframework.context.annotation.ConfigurationClassPostProcessor.enhancedConfigurationProcessor	class org.springframework.context.annotation.ConfigurationClassPostProcessor$EnhancedConfigurationBeanPostProcessor
+
+# Adding spring-boot-starter-logging and removing commons-logging doesn't affect the registered beans.
+
+# Adding spring-boot-autoconfigure doesn't affect the registered beans, but after adding the @SpringBootApplication annotation, the following changes:
+
+- application	class changeit.Application
++ application	class changeit.Application$$EnhancerBySpringCGLIB$$8b5d0107
++ org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor	class org.springframework.context.annotation.ConfigurationClassPostProcessor$ImportAwareBeanPostProcessor
++ org.springframework.context.annotation.ConfigurationClassPostProcessor.enhancedConfigurationProcessor	class org.springframework.context.annotation.ConfigurationClassPostProcessor$EnhancedConfigurationBeanPostProcessor
++ org.springframework.boot.autoconfigure.AutoConfigurationPackages	class org.springframework.boot.autoconfigure.AutoConfigurationPackages$BasePackages
++ org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration	class org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration$$EnhancerBySpringCGLIB$$d23dcbdf
++ org.springframework.boot.autoconfigure.condition.BeanTypeRegistry	class org.springframework.boot.autoconfigure.condition.BeanTypeRegistry$OptimizedBeanTypeRegistry
++ propertySourcesPlaceholderConfigurer	class org.springframework.context.support.PropertySourcesPlaceholderConfigurer
++ org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration	class org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration$$EnhancerBySpringCGLIB$$fa206641
++ mbeanExporter	class org.springframework.jmx.export.annotation.AnnotationMBeanExporter
++ objectNamingStrategy	class org.springframework.boot.autoconfigure.jmx.ParentAwareNamingStrategy
++ mbeanServer	class com.sun.jmx.mbeanserver.JmxMBeanServer
+
+# Switching to spring-boot-starter-web, but without tomcat and validation:
+
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web') {
+        exclude(module: 'spring-boot-starter-tomcat')
+        exclude(module: 'spring-boot-starter-validation')
+    }
+
+# The following beans are added:
+
++ org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperBuilderConfiguration	class org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperBuilderConfiguration$$EnhancerBySpringCGLIB$$87ab6b59
++ jacksonObjectMapperBuilder	class org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
++ spring.jackson.CONFIGURATION_PROPERTIES	class org.springframework.boot.autoconfigure.jackson.JacksonProperties
++ org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor	class org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor
++ org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor.store	class org.springframework.boot.context.properties.CfigurationBeanFactoryMetaData
++ org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration	class org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration$$EnhancerBySpringCGLIB$$4ad8f860
++ jacksonObjectMapper	class com.fasterxml.jackson.databind.ObjectMapper
++ org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration	class org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$$EnhancerBySpringCGLIB$$6fec100f
++ org.springframework.boot.autoconfigure.web.HttpMessageConvertersAutoConfiguration$StringHttpMessageConverterConfiguration	class org.springframework.boot.autoconfigure.web.HttpMessageConvertersAutoConfiguration$StringHttpMessageConverterConfiguration$$EnhancerBySpringCGLIB$$48071fef
++ stringHttpMessageConverter	class org.springframework.http.converter.StringHttpMessageConverter
++ spring.http.encoding.CONFIGURATION_PROPERTIES	class org.springframework.boot.autoconfigure.web.HttpEncodingProperties
++ org.springframework.boot.autoconfigure.web.JacksonHttpMessageConvertersConfiguration$MappingJackson2HttpMessageConverterConfiguration	class org.springframework.boot.autoconfigure.web.JacksonHttpMessageConvertersConfiguration$MappingJackson2HttpMessageConverterConfiguration$$EnhancerBySpringCGLIB$$779809ef
++ mappingJackson2HttpMessageConverter	class org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
++ org.springframework.boot.autoconfigure.web.JacksonHttpMessageConvertersConfiguration	class org.springframework.boot.autoconfigure.web.JacksonHttpMessageConvertersConfiguration$$EnhancerBySpringCGLIB$$c7f3cba5
++ org.springframework.boot.autoconfigure.web.HttpMessageConvertersAutoConfiguration	class org.springframework.boot.autoconfigure.web.HttpMessageConvertersAutoConfiguration$$EnhancerBySpringCGLIB$$2cfde94f
++ messageConverters	class org.springframework.boot.autoconfigure.web.HttpMessageConverters
+
+# Adding Tomcat changes a lot:
+
+# + WebSocket:
+
+org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration$TomcatWebSocketConfiguration	class org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration$TomcatWebSocketConfiguration$$EnhancerBySpringCGLIB$$c89acb5a
+websocketContainerCustomizer	class org.springframework.boot.autoconfigure.websocket.TomcatWebSocketContainerCustomizer
+org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration	class org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration$$EnhancerBySpringCGLIB$$4af605a9
+
+# + Embedded Servlet Container (Tomcat):
+
+org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration$EmbeddedTomcat	class org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration$EmbeddedTomcat$$EnhancerBySpringCGLIB$$ba6a2bed
+tomcatEmbeddedServletContainerFactory	class org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory
+org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration	class org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration$$EnhancerBySpringCGLIB$$87f8e491
+embeddedServletContainerCustomizerBeanPostProcessor	class org.springework.boot.context.embedded.EmbeddedServletContainerCustomizerBeanPostProcessor
+
+# + Other Servlet beans:
+
+org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration$DispatcherServletConfiguration	class org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration$DispatcherServletConfiguration$$EnhancerBySpringCGLIB$$57ab4963
+dispatcherServlet	class org.springframework.web.servlet.DispatcherServlet
+dispatcherServletRegistration	class org.springframework.boot.context.embedded.ServletRegistrationBean
+org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration	class org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration$$EnhancerBySpringCGLIB$$2a8ba425
+beanNameViewResolver	class org.springframework.web.servlet.view.BeanNameViewResolver
+
+requestMappingHandlerAdapter	class org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter
+requestMappingHandlerMapping	class org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping
+mvcContentNegotiationManager	class org.springframework.web.accept.ContentNegotiationManager
+viewControllerHandlerMapping	class org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport$EmptyHandlerMapping
+beanNameHandlerMapping	class org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping
+resourceHandlerMapping	class org.springframework.web.servlet.handler.SimpleUrlHandlerMapping
+mvcResourceUrlProvider	class org.springframework.web.servlet.resource.ResourceUrlProvider
+defaultServletHandlerMapping	class org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport$EmptyHandlerMapping
+mvcConversionService	class org.springframework.format.support.DefaultFormattingConversionService
+mvcValidator	class org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport$NoOpValidator
+mvcPathMatcher	class org.springframework.util.AntPathMatcher
+mvcUrlPathHelper	class org.springframework.web.util.UrlPathHelper
+mvcUriComponentsContributor	class org.springframework.web.method.support.CompositeUriComponentsContributor
+httpRequestHandlerAdapter	class org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter
+simpleControllerHandlerAdapter	class org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter
+handlerExceptionResolver	class org.springframework.web.servlet.handler.HandlerExceptionResolverComposite
+mvcViewResolver	class org.springframework.web.servlet.view.ViewResolverComposite
+org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter$FaviconConfiguration	class org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter$FaviconConfiguration$$EnhancerBySpringCGLIB$$6ad7d9c5
+faviconHandlerMapping	class org.springframework.web.servlet.handler.SimpleUrlHandlerMapping
+faviconRequestHandler	class org.springframework.web.servlet.resource.ResourceHttpRequestHandler
+org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter	class org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter$$EnhancerBySpringCGLIB$$baf                                                                                                                                                                            f344d
+defaultViewResolver	class org.springframework.web.servlet.view.InternalResourceViewResolver
+requestContextListener	class org.springframework.web.context.request.RequestContextListener
+viewResolver	class org.springframework.web.servlet.view.ContentNegotiatingViewResolver
+
+# + Web error handling
+
+org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration	class org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration$$EnhancerBySpringCGLIB$$9caef7ff
+error	class org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$SpelView
+org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration	class org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$$EnhancerBySpringCGLIB$$da51f7c5
+errorAttributes	class org.springframework.boot.autoconfigure.web.DefaultErrorAttributes
+basicErrorController	class org.springframework.boot.autoconfigure.web.BasicErrorController
+org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$EnableWebMvcConfiguration	class org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$EnableWebMvcConfiguration$$EnhancerBySpringCGLIB$$49b7313a
+
+# + Spring Web MVC, etc.
+
+spring.mvc.CONFIGURATION_PROPERTIES	class org.springframework.boot.autoconfigure.web.WebMvcProperties
+spring.resources.CONFIGURATION_PROPERTIES	class org.springframework.boot.autoconfigure.web.ResourceProperties
+org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor	class org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor
+org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor.store	class org.springframework.boot.context.properties.ConfigurationBeanFactoryMetaData
+org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration	class org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$$EnhancerBySpringCGLIB$$66b9dd91
+hiddenHttpMethodFilter	class org.springframework.boot.context.web.OrderedHiddenHttpMethodFilter
+stringHttpMessageConverter	class org.springframework.http.converter.StringHttpMessageConverter
+spring.http.encoding.CONFIGURATION_PROPERTIES	class org.springframework.boot.autoconfigure.web.HttpEncodingProperties
+org.springframework.boot.autoconfigure.web.HttpEncodingAutoConfiguration	class org.springframework.boot.autoconfigure.web.HttpEncodingAutoConfiguration$$EnhancerBySpri$$bba2099c
+characterEncodingFilter	class org.springframework.boot.context.web.OrderedCharacterEncodingFilter
+org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration	class org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration$$EnhancerBySpringCGLIB$$2e51ded7
+multipartConfigElement	class javax.servlet.MultipartConfigElement
+multipartResolver	class org.springframework.web.multipart.support.StandardServletMultipartResolver
+multipart.CONFIGURATION_PROPERTIES	class org.springframework.boot.autoconfigure.web.MultipartProperties
+org.springframework.boot.autoconfigure.web.ServerPropertiesAutoConfiguration	class org.springframework.boot.autoconfigure.web.ServerPropertiesAutoConfiguration$$EnhancerBySpringCGLIB$$d9735e21
+serverProperties	class org.springframework.boot.autoconfigure.web.ServerProperties
+
+# + JMX Beans
+
+org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration	class org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration$$EnhancerBySpringCGLIB$$9cbcd7ed
+objectNamingStrategy	class org.springframework.boot.autoconfigure.jmx.ParentAwareNamingStrategy
+
+# Adding Spring Security OAuth2:
+
+compile(group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.0.7.RELEASE')
+
+\--- org.springframework.security.oauth:spring-security-oauth2:2.0.7.RELEASE
+     +--- org.springframework:spring-beans:4.0.9.RELEASE -> 4.2.0.RC2 (*)
+     +--- org.springframework:spring-core:4.0.9.RELEASE -> 4.2.0.RC2
+     +--- org.springframework:spring-context:4.0.9.RELEASE -> 4.2.0.RC2 (*)
+     +--- org.springframework:spring-webmvc:4.0.9.RELEASE -> 4.2.0.RC2 (*)
+     +--- org.springframework.security:spring-security-core:3.2.6.RELEASE -> 4.0.1.RELEASE
+     |    +--- aopalliance:aopalliance:1.0
+     |    +--- org.springframework:spring-aop:4.1.6.RELEASE -> 4.2.0.RC2 (*)
+     |    +--- org.springframework:spring-beans:4.1.6.RELEASE -> 4.2.0.RC2 (*)
+     |    +--- org.springframework:spring-context:4.1.6.RELEASE -> 4.2.0.RC2 (*)
+     |    +--- org.springframework:spring-core:4.1.6.RELEASE -> 4.2.0.RC2
+     |    \--- org.springframework:spring-expression:4.1.6.RELEASE -> 4.2.0.RC2 (*)
+     +--- org.springframework.security:spring-security-config:3.2.6.RELEASE -> 4.0.1.RELEASE
+     |    +--- aopalliance:aopalliance:1.0
+     |    +--- org.springframework.security:spring-security-core:4.0.1.RELEASE (*)
+     |    +--- org.springframework:spring-aop:4.1.6.RELEASE -> 4.2.0.RC2 (*)
+     |    +--- org.springframework:spring-beans:4.1.6.RELEASE -> 4.2.0.RC2 (*)
+     |    +--- org.springframework:spring-context:4.1.6.RELEASE -> 4.2.0.RC2 (*)
+     |    \--- org.springframework:spring-core:4.1.6.RELEASE -> 4.2.0.RC2
+     +--- org.springframework.security:spring-security-web:3.2.6.RELEASE -> 4.0.1.RELEASE
+     |    +--- aopalliance:aopalliance:1.0
+     |    +--- org.springframework.security:spring-security-core:4.0.1.RELEASE (*)
+     |    +--- org.springframework:spring-beans:4.1.6.RELEASE -> 4.2.0.RC2 (*)
+     |    +--- org.springframework:spring-context:4.1.6.RELEASE -> 4.2.0.RC2 (*)
+     |    +--- org.springframework:spring-core:4.1.6.RELEASE -> 4.2.0.RC2
+     |    +--- org.springframework:spring-expression:4.1.6.RELEASE -> 4.2.0.RC2 (*)
+     |    \--- org.springframework:spring-web:4.1.6.RELEASE -> 4.2.0.RC2 (*)
+     +--- commons-codec:commons-codec:1.6
+     \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13
+          \--- org.codehaus.jackson:jackson-core-asl:1.9.13
+
+# This adds spring-security-core, spring-security-config and spring-security-web
+
+# Many dependencies are automatically upgraded by Gradle, except for jackson-mapper-asl which has a new groupId and
+# artifactId: com.fasterxml.jackson.core:jackson-databind:2.5.4 so we'll add an exlusion for 'jackson-mapper-asl'
+
+# The following security-related beans are added (none are related to OAuth2):
+# - the application is now automatically secured with a random password and HTTP Basic authentication
+# - DefaultSecurityFilterChain is created which excludes: /css/*, /js/*, /images/*, /**/favicon.ico and /error
+
+org.springframework.boot.autoconfigure.security.SpringBootWebSecurityConfiguration$ApplicationWebSecurityConfigurerAdapter	class org.springframework.boot.autoconfigure.security.SpringBootWebSecurityConfiguration$ApplicationWebSecurityConfigurerAdapter$$EnhancerBySpringCGLIB$$2b728049
+org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration	class org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration$$EnhancerBySpringCGLIB$$ed5a5fb5
+authenticationManagerBuilder	class org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+enableGlobalAuthenticationAutowiredConfigurer	class org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration$EnableGlobalAuthenticationAutowiredConfigurer
+org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration	class org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$$EnhancerBySpringCGLIB$$4126c179
+delegatingApplicationListener	class org.springframework.security.context.DelegatingApplicationListener
+webSecurityExpressionHandler	class org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler
+springSecurityFilterChain	class org.springframework.security.web.FilterChainProxy
+privilegeEvaluator	class org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator
+autowiredWebSecurityConfigurersIgnoreParents	class org.springframework.security.config.annotation.web.configuration.AutowiredWebSecurityConfigurersIgnoreParents
+org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration	class org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$55bd7fe0
+objectPostProcessor	class org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor
+org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration	class org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration
+requestDataValueProcessor	class org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor
+org.springframework.boot.autoconfigure.security.SpringBootWebSecurityConfiguration	class org.springframework.boot.autoconfigure.security.SpringBootWebSecurityConfiguration$$EnhancerBySpringCGLIB$$ea75868e
+ignoredPathsWebSecurityConfigurerAdapter	class org.springframework.boot.autoconfigure.security.SpringBootWebSecurityConfiguration$IgnoredPathsWebSecurityConfigurerAdapter
+securityFilterChainRegistration	class org.springframework.boot.context.embedded.FilterRegistrationBean
+org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration$AuthenticationManagerConfigurationListener	class org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration$AuthenticationManagerConfigurationListener
+org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration	class org.springfrak.boot.autoconfigure.security.AuthenticationManagerConfiguration$$EnhancerBySpringCGLIB$$9a70f70e
+authenticationManager	class org.springframework.security.authentication.ProviderManager
+springBootAuthenticationConfigurerAdapter	class org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration$SpringBootAuthenticationConfigurerAdapter
+org.springframework.boot.autoconfigure.security.BootGlobalAuthenticationConfiguration	class org.springframework.boot.autoconfigure.security.BootGlobalAuthenticationConfiguration$$EnhancerBySpringCGLIB$$c54a82d2
+bootGlobalAuthenticationConfigurationAdapter	class org.springframework.boot.autoconfigure.security.BootGlobalAuthenticationConfiguration$BootGlobalAuthenticationConfigurationAdapter
+org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration	class org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration$$EnhancerBySpringCGLIB$$9b84cf10
+authenticationEventPublisher	class org.springframework.security.authentication.DefaultAuthenticationEventPublisher
+securityProperties	class org.springframework.boot.autoconfigure.security.SecurityProperties
+
+# Adding the following to the Application class:
+
+    @Configuration
+    @EnableWebSecurity
+    @EnableGlobalMethodSecurity(prePostEnabled = true)
+    protected static class SecurityConfig extends WebSecurityConfigurerAdapter {}
+
+# creates the following beans:
+
+application.SecurityConfig	class changeit.Application$SecurityConfig$$EnhancerBySpringCGLIB$$c5b56b4b
+org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration	class org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration$$EnhancerBySpringCGLIB$$796de4ac
+authenticationManagerBuilder	class org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+enableGlobalAuthenticationAutowiredConfigurer	class org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration$EnabllobalAuthenticationAutowiredConfigurer
+org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration	class org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$94af3949
+methodSecurityInterceptor	class org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor
+methodSecurityMetadataSource	class org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource
+preInvocationAuthorizationAdvice	class org.springframework.security.access.expression.method.ExpressionBasedPreInvocationAdvice
+metaDataSourceAdvisor	class org.springframework.security.access.intercept.aopalliance.MethodSecurityMetadataSourceAdvisor
+org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration	class org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$e1d104d7
+objectPostProcessor	class org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor
+org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration	class org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$$EnhancerBySpringCGLIB$$cd3a4670
+delegatingApplicationListener	class org.springframework.security.context.DelegatingApplicationListener
+webSecurityExpressionHandler	class org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler
+springSecurityFilterChain	class org.springframework.security.web.FilterChainProxy
+privilegeEvaluator	class org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator
+autowiredWebSecurityConfigurersIgnoreParents	class org.springframework.security.config.annotation.web.configuration.AutowiredWebSecurityConfigurersIgnoreParents
+org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration	class org.springframework.security.config.atation.web.configuration.WebMvcSecurityConfiguration
+requestDataValueProcessor	class org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor
+
+# - Oauth:
+
+org.springframework.boot.autoconfigure.security.oauth2.OAuth2AutoConfiguration$ResourceServerOrderProcessor	class org.springframework.boot.autoconfigure.security.oauth2.OAuutoConfiguration$ResourceServerOrderProcessor$$EnhancerBySpringCGLIB$$a07d77dd
+org.springframework.boot.autoconfigure.security.oauth2.method.OAuth2MethodSecurityConfiguration	class org.springframework.boot.autoconfigure.security.oauth2.method.OAuth2MethodSecurityConfiguration$$EnhancerBySpringCGLIB$$d743679d
+org.springframework.boot.autoconfigure.security.oauth2.OAuth2AutoConfiguration	class org.springframework.boot.autoconfigure.security.oauth2.OAuth2AutoConfiguration$$EnhancerBySpringCGLIB$$aa8d16fa
+resourceServerProperties	class org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties
+security.oauth2.client.CONFIGURATION_PROPERTIES	class org.springframework.boot.autoconfigure.security.oauth2.OAuth2ClientProperties
+
+# - Other?:
+
+org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration$AuthenticationManagerConfigurationListener	class org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration$AuthenticationManagerConfigurationListener
+org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration	class org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration$$EnhancerBySpringCGLIB$$d79f9b22
+authenticationManager	class org.springframework.security.authentication.ProviderManager
+springBootAuthenticationConfigurerAdapter	class org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration$SpringBootAuthenticationConfigurerAdapter
+org.springframework.boot.autoconfigure.security.BootGlobalAuthenticationConfiguration	class org.springframework.boot.autoconfigure.security.BootGlobalAuthenticationConfigurati$$EnhancerBySpringCGLIB$$27926e6
+bootGlobalAuthenticationConfigurationAdapter	class org.springframework.boot.autoconfigure.security.BootGlobalAuthenticationConfiguration$BootGlobalAuthenticationConfigurationAdapter
+org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration	class org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration$$EnhancerBySpringCGLIB$$d8b37324
+authenticationEventPublisher	class org.springframework.security.authentication.DefaultAuthenticationEventPublisher
+securityProperties	class org.springframework.boot.autoconfigure.security.SecurityProperties

@@ -1,0 +1,12 @@
+server:
+    port: 8082
+    contextPath: /api
+        
+security:
+    oauth2:
+        resource:
+            jwt:
+                # Tells the JWT framework to fetch the public key from the authorization server during startup
+                # Note: The authorization server needs to be running...
+                key-uri: "http://localhost:8081/oauth/token_key"
+
