@@ -50,8 +50,17 @@ public class Application extends SpringBootServletInitializer {
         return application.sources(Application.class);
     }
 
+    /**
+     * The heart of our interaction with the resource; handles redirection for authentication, access tokens, etc.
+     * @param oauth2ClientContext
+     * @return
+     */
     @Bean
-    protected OAuth2ProtectedResourceDetails resource() {
+    public OAuth2RestOperations restTemplate(OAuth2ClientContext oauth2ClientContext) {
+        return new OAuth2RestTemplate(resource(), oauth2ClientContext);
+    }
+
+    private OAuth2ProtectedResourceDetails resource() {
         AuthorizationCodeResourceDetails resource = new AuthorizationCodeResourceDetails();
         resource.setClientId(clientID);
         resource.setClientSecret(clientSecret);
@@ -60,11 +69,6 @@ public class Application extends SpringBootServletInitializer {
         resource.setScope(Arrays.asList("read"));
 
         return resource;
-    }
-
-    @Bean
-    public OAuth2RestOperations restTemplate(OAuth2ClientContext oauth2ClientContext) {
-        return new OAuth2RestTemplate(resource(), oauth2ClientContext);
     }
 
 }
