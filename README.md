@@ -3,9 +3,9 @@
 ## Introduction
 I've created this project to understand how to deal with clients accessing protected resource servers using a central authorization server. Apart from general OAuth 2.0 and JWT theory, I wanted to study how the following components interoperate:
 
-- Spring Boot 1.3.0.M2 (with Spring 4.2.0.RC2)
-- Spring Security 4.0.1.RELEASE
-- Spring Security OAuth2 2.0.7.RELEASE
+- Spring Boot 1.3.0.RELEASE (with Spring 4.2.3.RELEASE)
+- Spring Security 4.0.3.RELEASE
+- Spring Security OAuth2 2.0.8.RELEASE
 - Spring Security JWT 1.0.3.RELEASE
 
 Spring Boot can be pretty magical, especially with regard to *auto-configuration*. While I'm a fan of *convention-over-configuration* development (I've used Grails for years), that doesn't mean it always makes sense. At least not at first, to newcomers like me.
