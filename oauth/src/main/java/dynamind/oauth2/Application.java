@@ -156,7 +156,7 @@ public class Application extends SpringBootServletInitializer {
 
                             // Public client where client secret is vulnerable (e.g. mobile apps, browsers)
                     .withClient("public") // No secret!
-                    .authorizedGrantTypes("client_credentials", "implicit")
+                    .authorizedGrantTypes("implicit")
                     .scopes("read")
                     .redirectUris("http://localhost:8080/client/")
 
